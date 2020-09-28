@@ -35,6 +35,9 @@ def create_vecs(algo, corpus):
     vect = vectorizer.fit(df["content"])
 
     # pickle.dump(vect, open(f"./pkls/{corpus}_{algo}.pkl", "wb"))
+    if not os.path.exists("./app/engine/pkls"):
+        os.mkdir("./app/engine/pkls")
+
     pickle.dump(vect, open(f"./app/engine/pkls/{corpus}_{algo}.pkl", "wb"))
     return vect
 
@@ -68,6 +71,6 @@ def get_top_docs(q, a, c):
 
     ret_docs = {}
     for idx, (k, v) in enumerate(sims_sorted.items()):
-        ret_docs[idx] = fc[k]
+        ret_docs[k] = fc[k]
 
     return ret_docs
