@@ -67,7 +67,7 @@ def get_top_docs(q, a, c):
         # print(f"doc.shape: {doc.shape}\t:q_arr.shape {q_arr.shape}")
         sim_score = cosine_similarity(doc.reshape(1, -1), q_arr)[0][0]
         sims[i] = sim_score
-    sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True)) if i < 2}
+    sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True)) if i < 5}
 
     ret_docs = {}
     for idx, (k, v) in enumerate(sims_sorted.items()):

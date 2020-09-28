@@ -17,8 +17,16 @@ def res():
         form_r = form_result.to_dict(flat=False)
     print("form_r", form_r)
 
-    res = gtp(form_r["query"][0], form_r["algo"][0], form_r["corpus"][0])
-    return jsonify(res)
+    res = gtp(form_r["query"][0], form_r["algo"][0], "abstracts")
+    return render_template("result.html", docs=res, query=form_r["query"][0])
+
+    # res = gtp(form_r["query"][0], form_r["algo"][0], form_r["corpus"][0])
+
+    # for d_id, diction in res.items():
+    #     # print(d_id, diction)
+    #     print(f'id: {d_id}\t{diction["title"]}\t{diction["content"]}')
+
+    # return jsonify(res)
 
 if __name__ == "__main__":
     flask_app.run(host='0.0.0.0')
