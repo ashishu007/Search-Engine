@@ -3,6 +3,9 @@ RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev && \
     apt-get -y install locales
 
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
 WORKDIR /code
 ENV FLASK_APP main.py
 ENV FLASK_RUN_HOST 0.0.0.0

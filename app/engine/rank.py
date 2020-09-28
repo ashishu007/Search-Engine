@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def data_reader(dir_path):
     file_content = {}
     for i, f in enumerate(os.listdir(dir_path)):
-        doc = open(os.path.join(dir_path, f), 'r').read()
+        doc = open(os.path.join(dir_path, f), 'r', encoding="ISO-8859-1").read()
         doc_line = doc.split("\n")
         flag_title_found = False
         content = ""
@@ -67,7 +67,7 @@ def get_top_docs(q, a, c):
         # print(f"doc.shape: {doc.shape}\t:q_arr.shape {q_arr.shape}")
         sim_score = cosine_similarity(doc.reshape(1, -1), q_arr)[0][0]
         sims[i] = sim_score
-    sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True)) if i < 10}
+    sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True)) if i < 2}
 
     ret_docs = {}
     for idx, (k, v) in enumerate(sims_sorted.items()):
