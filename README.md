@@ -13,8 +13,8 @@ This is the list of algorithms currently supported for document ranking.
 
 * Pull the image from `docker-hub`:
 
-```docker pull ashishu007/rgu-soc-se:latest```
+    ```docker pull ashishu007/rgu-soc-se:latest```
 
 * Run the image:
 
-```docker run -d -p 5000:5000 ashishu007/rgu-soc-se:latest```
+    ```docker run -d -p 5000:5000 ashishu007/rgu-soc-se:latest```
