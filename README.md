@@ -25,7 +25,7 @@ This is the list of algorithms currently supported for document ranking.
 
 Assuming you have `docker` installed and an app created on `heroku`.
 
-0. Suppose the app created on heroku is: `rgu-soc-search-engine`
+0. Suppose the app created on heroku is: `rgu-soc-search-eng`
 
 1. Clone the repo:
 
@@ -33,19 +33,19 @@ Assuming you have `docker` installed and an app created on `heroku`.
 
 2. Build the docker-container:
 
-    `docker build -t search-engine:latest .`
+    `docker build -t search-eng:latest .`
 
 3. Tag the docker-container:
 
-    `docker tag search-engine registry.heroku.com/rgu-soc-search-engine/web`
+    `docker tag search-eng registry.heroku.com/rgu-soc-search-eng/web`
 
 4. Push the tagged container to the heroku-registry:
 
-    `docker push registry.heroku.com/rgu-soc-search-engine/web`
+    `docker push registry.heroku.com/rgu-soc-search-eng/web`
 
 5. Release the container on heroku:
 
-    `heroku container:release -a rgu-soc-search-engine web`
+    `heroku container:release -a rgu-soc-search-eng web`
 
-6. Goto the browser, and type: [rgu-soc-search-engine.herokuapp.com](https://rgu-soc-search-engine.herokuapp.com/)
+6. Goto the browser, and type: [rgu-soc-search-eng.herokuapp.com](https://rgu-soc-search-eng.herokuapp.com/)
 
