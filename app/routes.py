@@ -1,12 +1,12 @@
-from app import flask_app
+from app import app
 from flask import request, jsonify, render_template
 from app.engine.rank import get_top_docs as gtp
 
-@flask_app.route("/")
+@app.route("/")
 def hello():
     return render_template("default.html")
 
-@flask_app.route("/res", methods=["GET", "POST"])
+@app.route("/res", methods=["GET", "POST"])
 def res():
     # query = request.args.get('q')
     # algo = request.args.get('a')
@@ -29,4 +29,5 @@ def res():
     # return jsonify(res)
 
 if __name__ == "__main__":
-    flask_app.run(host='0.0.0.0')
+    app.run()
+    # flask_app.run(host='0.0.0.0')
