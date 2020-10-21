@@ -4,10 +4,10 @@ from app.engine.rank import get_top_docs as gtp
 
 @app.route("/")
 def hello():
-    return render_template("default.html")
+    return render_template("index.html")
 
-@app.route("/res", methods=["GET", "POST"])
-def res():
+@app.route("/result", methods=["GET", "POST"])
+def result():
     # query = request.args.get('q')
     # algo = request.args.get('a')
     # corpus = request.args.get('c')
@@ -18,15 +18,7 @@ def res():
     print("form_r", form_r)
 
     res = gtp(form_r["query"][0], form_r["algo"][0], "abstracts")
-    return render_template("result.html", docs=res, query=form_r["query"][0])
-
-    # res = gtp(form_r["query"][0], form_r["algo"][0], form_r["corpus"][0])
-
-    # for d_id, diction in res.items():
-    #     # print(d_id, diction)
-    #     print(f'id: {d_id}\t{diction["title"]}\t{diction["content"]}')
-
-    # return jsonify(res)
+    return render_template("result.html", docs=res, query=form_r["query"][0], num_docs=len(res))
 
 if __name__ == "__main__":
     app.run()

@@ -39,6 +39,8 @@ Assuming you have `docker` installed and an app created on `heroku`.
 
     `docker tag search-eng registry.heroku.com/rgu-soc-search-eng/web`
 
+    * If getting authentication required message, run this: `heroku container:login`
+
 4. Push the tagged container to the heroku-registry:
 
     `docker push registry.heroku.com/rgu-soc-search-eng/web`

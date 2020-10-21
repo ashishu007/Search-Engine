@@ -2,6 +2,7 @@ import os, pickle
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+# from sentence_transformers import SentenceTransformer
 
 def data_reader(dir_path):
     file_content = {}
@@ -41,6 +42,14 @@ def create_vecs(algo, corpus):
     pickle.dump(vect, open(f"./app/engine/pkls/{corpus}_{algo}.pkl", "wb"))
     return vect
 
+def create_bert_vecs(corpus):
+    fc = data_reader(f"./app/engine/data/{corpus}")
+    df = pd.DataFrame(fc).T
+    bert_model = SentenceTransformer('distilbert-base-nli-mean-tokens')
+    bert_embs = bert_model.encode(df["content"])
+    pickle.dump(bert_embs, open(f"./app/engine/pkls/{corpus}_bert.pkl", wb))
+    return bert_embs
+
 def get_top_docs(q, a, c):
     # if os.path.exists(f"./app/engine/pkls/{c}_{a}.pkl"):
     if os.path.exists(f"./pkls/{c}_{a}.pkl"):
@@ -62,12 +71,18 @@ def get_top_docs(q, a, c):
     # print(f"x_arr.shape: {x_arr.shape}")
     # print(f"q_arr.shape: {q_arr.shape}")
 
-    sims = {}
-    for i, doc in enumerate(x_arr):
-        # print(f"doc.shape: {doc.shape}\t:q_arr.shape {q_arr.shape}")
-        sim_score = cosine_similarity(doc.reshape(1, -1), q_arr)[0][0]
-        sims[i] = sim_score
-    sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True)) if i < 5}
+    if a == "bert":
+        # sims = {}
+        # for i, doc in enumerate()
+        pass
+    else:
+        sims = {}
+        for i, doc in enumerate(x_arr):
+            # print(f"doc.shape: {doc.shape}\t:q_arr.shape {q_arr.shape}")
+            sim_score = cosine_similarity(doc.reshape(1, -1), q_arr)[0][0]
+            sims[i] = sim_score
+        sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True)) if i < 10}
+        # sims_sorted = {k: v for i, (k, v) in enumerate(sorted(sims.items(), key=lambda item: item[1], reverse=True))}
 
     ret_docs = {}
     for idx, (k, v) in enumerate(sims_sorted.items()):
